@@ -1,0 +1,51 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+
+<form action="/comprarBoletos" method="POST" id="formCineBoletos">
+    
+    <label>Cantidad de boletos:</label>
+    <input type="number" id="txtCantidad" step="1" min="1" max="7"/><br> 
+    <label>N2:</label>
+    <input type="text"name="n2"/><br>
+    <input type="submit"/>
+    <label id="lblTotal"></label>
+    </form> 
+
+    <script>
+        let htmlCantidad = document.getElementById("txtCantidad");
+        let htmlTotal = document.getElementById("lblTotal");
+        htmlCantidad.addEventListener("input", cambiarLabelTotal);
+
+        
+        async function cambiarLabelTotal(){
+            let htmlCantidad = document.getElementById("txtCantidad");
+        let htmlTotal = document.getElementById("lblTotal");
+            if (!htmlCantidad.value>0){
+                htmlCantidad.value = 1;
+            }
+
+        var formData = new FormData();
+        formData.append('cantidad', htmlCantidad.value);
+
+        const responsedTotal = await fetch("/calcularTotal", {method:"POST",
+            body:formData
+        });
+        htmlTotal.innerHTML = responsedTotal.text();  
+        console.log(responsedTotal.text())
+        }
+
+        
+
+
+
+        htmlTotal.innerHTML = htmlCantidad.value + " boletos: " + Number(htmlCantidad.value) * 12000;
+            if (htmlCantidad.value>5){
+                
+            }
+            htmlTotal.innerHTML = Number(htmlCantidad.value) * 12000;
+
+      
+    </script>
+
+{%endblock%}
