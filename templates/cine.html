@@ -2,50 +2,61 @@
 
 {%block content%}
 
-<form action="/comprarBoletos" method="POST" id="formCineBoletos">
+<form  id="formCineBoletos">
     
     <label>Cantidad de boletos:</label>
     <input type="number" id="txtCantidad" step="1" min="1" max="7"/><br> 
-    <label>N2:</label>
-    <input type="text"name="n2"/><br>
-    <input type="submit"/>
+    <label for="rdTarjeta">Forma de Pago:</label>
+    <input type="radio" name="rdTarjeta" value="0" checked>Efectivo
+    <input type="radio" name="rdTarjeta" value="1">Tarjeta Cineco
+    <button type="button" id="btnComprar" onclick="comprar()">Comprar</button>
     <label id="lblTotal"></label>
+
     </form> 
 
     <script>
-        let htmlCantidad = document.getElementById("txtCantidad");
-        let htmlTotal = document.getElementById("lblTotal");
-        htmlCantidad.addEventListener("input", cambiarLabelTotal);
+    let htmlCantidad = document.getElementById("txtCantidad");
+    htmlCantidad.addEventListener("input", actualizarTotal);
+    radios = document.querySelector('input[name="rdTarjeta"]')
 
-        
-        async function cambiarLabelTotal(){
+    for(radio in radios) {
+        radios[radio].onclick = actualizarTotal();
+    }
+
+    function comprar(){
+        document.getElementById("txtCantidad").value = null}
+
+        async function actualizarTotal(){
             let htmlCantidad = document.getElementById("txtCantidad");
-        let htmlTotal = document.getElementById("lblTotal");
             if (!htmlCantidad.value>0){
                 htmlCantidad.value = 1;
             }
+            var formData = new FormData();
+            console.log(document.querySelector('input[name="rdTarjeta"]:checked').value);
+            formData.append('cantidad', htmlCantidad.value);
+            formData.append('tarjetaBool', document.querySelector('input[name="rdTarjeta"]:checked').value);
 
-        var formData = new FormData();
-        formData.append('cantidad', htmlCantidad.value);
+             const response = fetch("/calcularTotal", {method:"POST",
+                body:formData
+            }).then(response => response.text())  
+    .then(texto => cambiarEtiqueta(texto))    //imprimir los datos en la consola
+    .catch(err => console.log('Solicitud fallida', err));
 
-        const responsedTotal = await fetch("/calcularTotal", {method:"POST",
-            body:formData
-        });
-        htmlTotal.innerHTML = responsedTotal.text();  
-        console.log(responsedTotal.text())
         }
 
-        
-
-
-
-        htmlTotal.innerHTML = htmlCantidad.value + " boletos: " + Number(htmlCantidad.value) * 12000;
-            if (htmlCantidad.value>5){
+            function cambiarEtiqueta(texto){
+            let htmlTotal = document.getElementById("lblTotal");
                 
+            if (texto>0){
+                htmlTotal.innerHTML = " precio boletos: " + texto;
+                document.getElementById("btnComprar").disabled = false;
+            }else{
+                htmlTotal.innerHTML = texto;
+                document.getElementById("btnComprar").disabled = true;
             }
-            htmlTotal.innerHTML = Number(htmlCantidad.value) * 12000;
+            console.log(texto)
+            }
 
-      
     </script>
 
 {%endblock%}

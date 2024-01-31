@@ -1,0 +1,18 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+{% import "_macros.html" as macros %}
+<h1>Distancia</h1>
+<form action="" method="post">
+{{macros.render_field(form.x1)}}
+{{macros.render_field(form.y1)}}
+{{macros.render_field(form.x2)}}
+{{macros.render_field(form.y2)}}
+<input type="submit" value="registrar" name="btn1">
+</form>
+
+<h1>Resultado : {{res}}</h1>
+
+
+
+{%endblock%}
