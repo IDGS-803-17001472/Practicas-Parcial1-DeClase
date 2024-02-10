@@ -3,12 +3,12 @@
 {%block content%}
 
 <form  id="formCineBoletos">
-    
+    <h1>Cinépolis</h1>
     <label>Cantidad de boletos:</label>
-    <input type="number" id="txtCantidad" step="1" min="1" max="7"/><br> 
+    <input class="input-xlarge"  type="number" id="txtCantidad" step="1" min="1" max="7"/><br> 
     <label for="rdTarjeta">Forma de Pago:</label>
-    <input type="radio" name="rdTarjeta" value="0" checked>Efectivo
-    <input type="radio" name="rdTarjeta" value="1">Tarjeta Cineco
+    <input type="radio" name="rdTarjeta" value="0" checked onchange="actualizarTotal(); " >Efectivo
+    <input type="radio" name="rdTarjeta" value="1" onchange="actualizarTotal();">Tarjeta Cineco
     <button type="button" id="btnComprar" onclick="comprar()">Comprar</button>
     <label id="lblTotal"></label>
 
@@ -19,12 +19,9 @@
     htmlCantidad.addEventListener("input", actualizarTotal);
     radios = document.querySelector('input[name="rdTarjeta"]')
 
-    for(radio in radios) {
-        radios[radio].onclick = actualizarTotal();
-    }
-
     function comprar(){
-        document.getElementById("txtCantidad").value = null}
+        document.getElementById("txtCantidad").value = null
+        alert("Compra realizada")}
 
         async function actualizarTotal(){
             let htmlCantidad = document.getElementById("txtCantidad");
