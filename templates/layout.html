@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,14 +13,76 @@
     <link rel="stylesheet" href="../static/bootstrap/js/bootstrap.min.js">
 
     <style>
-        body{
-            padding-top:60px;
+        body {
+            padding-top: 60px;
         }
-        .tr-head{
-            background:#dff0d8;
+
+        .tr-head {
+            background-color: #dff0d8;
+        }
+
+        .negro {
+            background-color: #000000 !important;
+            color: white !important;
+        }
+
+        .cafe {
+            background-color: #660f0f !important;
+            color: white !important;
+        }
+
+        .rojo {
+            background-color: #b80000 !important;
+            color: white !important;
+        }
+
+        .naranja {
+            background-color: #b03805 !important;
+            color: white !important;
+        }
+
+        .amarillo {
+            background-color: #f9ff59 !important;
+            color: #000000 !important;
+        }
+
+        .verde {
+            background-color: #47c404 !important;
+            color: black !important;
+        }
+
+        .azul {
+            background-color: #1704c4 !important;
+            color: white !important;
+        }
+
+        .violeta {
+            background-color: #78016e !important;
+            color: white !important;
+        }
+
+        .gris {
+            background-color: #4a4a4a !important;
+            color: white !important;
+        }
+
+        .blanco {
+            background-color: white !important;
+            color: black !important;
+        }
+
+        .plata {
+            background-color: #a6a6a6 !important;
+            color: black !important;
+        }
+
+        .dorado {
+            background-color: #636200 !important;
+            color: white !important;
         }
     </style>
 </head>
+
 <body>
     <div class="navbar navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
@@ -29,19 +92,19 @@
                 </a>
                 <ul class="nav">
                     <li class="active">
-                        <a href=""> 
+                        <a href="">
                             <i class="icon-home icone-white"></i>
                             Inicio
                         </a>
                     </li>
                     <li>
-                        <a href=""> 
+                        <a href="">
                             <i class="icon-user icone-white"></i>
                             Usuarios
                         </a>
                     </li>
                     <li>
-                        <a href=""> 
+                        <a href="">
                             <i class="icon-user icone-white"></i>
                             Alumnos
                         </a>
@@ -51,8 +114,8 @@
         </div>
     </div>
     <div class="container">
-    <div class="row">
-<!--
+        <div class="row">
+            <!--
         {% for n in alumnos %}
             <h3>{{n}}</h3>
         {% endfor %}
@@ -75,11 +138,12 @@
             </tr>
         </table>
 -->
-    </div>
+        </div>
 
-    {%block content%}
+        {%block content%}
 
-    {%endblock%}
+        {%endblock%}
 
 </body>
+
 </html>

@@ -1,0 +1,26 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+{% import "_macros.html" as macros %}
+<h1>Resistencias</h1>
+<form action="" method="post">
+    {{macros.render_field(form.linea1)}}
+    {{macros.render_field(form.linea2)}}
+    {{macros.render_field(form.linea3)}}
+    {{macros.render_field(form.tolerancia)}}
+    <input type="submit" value="registrar" name="btn1">
+</form>
+<table class="table table-striped" style="  border: 1px solid;">
+    <tr>
+        <th  class="{{col1}}">linea 1 : {{col1}}</th>
+        <th  class="{{col2}}">linea 2 : {{col2}}</th>
+        <th  class="{{col3}}">linea 3 : {{col3}}</th>
+        <th   class="{{toleranciaStr}}">Tolerancia : {{tolerancia}}</th style=" border: 1px solid;">
+        <th>Resistencia : {{res}}</th style=" border: 1px solid;">
+        <th>Resistencia Mínima : {{resMin}}</th style=" border: 1px solid;">
+        <th>Resistencia Máxima : {{resMax}}</th style=" border: 1px solid;">
+    </tr>
+</table>
+
+
+{%endblock%}
