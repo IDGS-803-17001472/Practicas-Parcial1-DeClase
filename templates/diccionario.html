@@ -1,0 +1,22 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+{% import "_macros.html" as macros %}
+<h1>Diccionario</h1>
+<form action="" method="post">
+{{macros.render_field(form1.txtPalaIngles)}}
+{{macros.render_field(form1.txtPalaEsp)}}
+<input type="submit" value="registrar" name="btn1">
+</form>
+
+
+<form action="/obtenerPalabraDiccionario" method="post">
+    {{macros.render_field(form2.txtPalATraducir)}}
+    {{macros.render_field(form2.idiomaOrigen)}}
+    <input type="submit" value="traducir" name="btn1">
+    <h2>{{res}}</h2 >
+    </form>
+
+
+
+{%endblock%}

@@ -85,6 +85,41 @@ def dist():
     return render_template("distancia.html", form=alum_form, res=res)
 
 
+reg_form = forms.DicRegistroForm()
+trasl_form = forms.DicTraducirForm()
+
+@app.route("/diccionario",methods=["GET","POST"])
+def dicc():
+    res=""
+    archivo_texto=open('nombres.txt','a')
+    reg_form = forms.DicRegistroForm(request.form)
+    if request.method=='POST'and reg_form.validate():
+        txtPalaIngles=reg_form.txtPalaIngles.data
+        txtPalaEsp=reg_form.txtPalaEsp.data
+        archivo_texto.write("{}:{}\n".format(txtPalaIngles.lower(),txtPalaEsp.lower()))
+        archivo_texto.close()
+    return render_template("diccionario.html", form1=reg_form, form2=trasl_form, res=res)
+
+@app.route("/obtenerPalabraDiccionario",methods=["POST"])
+def diccget():
+    trasl_form = forms.DicTraducirForm(request.form)
+    res="Palabra no encontrada"
+    if request.method=='POST'and trasl_form.validate():
+        archivo_texto=open('nombres.txt','r')
+        txtPalATraducir=trasl_form.txtPalATraducir.data
+        idiomaOrigen=trasl_form.idiomaOrigen.data
+        if idiomaOrigen=="ingles":
+            idiomaDestino=1
+        elif idiomaOrigen=="espanol":
+            idiomaDestino=0
+        for line in archivo_texto.readlines():
+            if( txtPalATraducir.lower() in line):
+                res=line.split(":")[idiomaDestino]
+        archivo_texto.close()
+    return render_template("diccionario.html", form1=reg_form, form2=trasl_form, res=res)
+
+
+
     
 @app.route("/resistencias",methods=["GET","POST"])
 def resistencia():
